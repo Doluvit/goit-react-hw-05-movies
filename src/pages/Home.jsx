@@ -9,7 +9,6 @@ const Home = () => {
       try {
         const { results } = await getMovies();
         setCollection(results);
-        // console.log(results);
       } catch (error) {
         console.log(error);
       }

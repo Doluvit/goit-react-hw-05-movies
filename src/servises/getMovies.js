@@ -17,8 +17,15 @@ export const getMovies = async () => {
     return data;
    
 }
-// export const Hello = () => {
-// console.log('object')
-// }
 
-// Hello();
+
+
+export const getMovieById = async (id) => {
+   const response = await axios.get(
+     `${BASE_URL}movie/${id}?api_key=485db8c64742926ad3904264dbc73b05`
+   );
+    const data = response.data;
+
+  return data;
+
+};

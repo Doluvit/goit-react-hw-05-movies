@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom';
+import { MovieLink, MovieTittle, MovieListHeader } from './MoviesList.styled';
 
 export const MoviesList = ({ collection }) => {
   return (
     <>
-      Trending today
+      <MovieListHeader>Trending today</MovieListHeader>
       <ul>
         {collection.map(({ title, id }) => {
           if (!title) {
             return null;
           }
+
           return (
-            <li key={id}>
+            <MovieLink key={id}>
               <Link to={`${id}`}>
-                <p>{title}</p>
+                <MovieTittle>{title}</MovieTittle>
               </Link>
-            </li>
+            </MovieLink>
           );
         })}
       </ul>
