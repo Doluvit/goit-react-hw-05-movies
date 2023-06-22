@@ -1,5 +1,7 @@
+import RequestMoviesList from 'components/Movies/RequestMoviesList';
+
 const Movies = () => {
-  return <div>Movies</div>;
+  return <RequestMoviesList />;
 };
 
 export default Movies;
