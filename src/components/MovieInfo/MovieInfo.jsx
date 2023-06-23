@@ -12,8 +12,11 @@ import {
   HorizontalLine,
 } from './MovieInfo.styled';
 
+
 const MovieInfo = ({ movieInfo }) => {
   const location = useLocation();
+ 
+
   const { title, vote_average, overview, poster_path, release_date, genres } =
     movieInfo;
   const buttonGoBack = useRef(location.state?.from ?? '/');

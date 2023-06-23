@@ -2,23 +2,26 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from 'servises/getMovies';
 import CastServisePicture from '../../servises/CastServisePicture.png';
+import { Loader } from 'components/Loader/Loader';
 import {
   CastContainer,
   CastItem,
   CastPhoto,
   CastTitle,
   CastCharacter,
-  NoCast
+  NoCast,
 } from './Cast.styled';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
   const { movieId } = useParams();
   const [noCast, setNoCast] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCastById() {
       try {
+        setLoading(true);
         const response = await getMovieCast(Number(movieId));
 
         if (!response.length) {
@@ -58,6 +61,7 @@ const Cast = () => {
           );
         }
       })}
+      <Loader isLoading={loading} />
     </CastContainer>
   );
 };

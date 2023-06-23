@@ -9,8 +9,13 @@ import {
   SearchFormInput,
 } from './RequestMoviesList.styled';
 import { getMovieByName } from 'servises/getMovies';
-import { MovieLink, MovieList, MovieTittle } from 'components/MoviesList/TrendingMoviesList.styled';
-// import { toast } from 'react-toastify';
+import {
+  MovieLink,
+  MovieList,
+  MovieTittle,
+} from 'components/MoviesList/TrendingMoviesList.styled';
+import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
 
 const RequestMoviesList = () => {
   const [filmRequest, setfilmRequest] = useSearchParams();
@@ -22,23 +27,27 @@ const RequestMoviesList = () => {
   useEffect(() => {
     const fetchMoviesByName = async () => {
       try {
-        setLoading(true);
         const response = await getMovieByName(newRequest);
         const data = response.results;
         setRequest(data);
+        setLoading(true);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
       }
     };
-    if (newRequest) fetchMoviesByName();
+    if (newRequest !== '') fetchMoviesByName();
   }, [newRequest]);
 
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
     const requestData = form.elements.name.value;
+    if (requestData.trim() === '') {
+      toast.error('Please, input your request!');
+      return;
+    }
     setfilmRequest({ newRequest: requestData });
     form.reset();
   };
@@ -67,6 +76,7 @@ const RequestMoviesList = () => {
             </MovieLink>
           );
         })}
+       {loading && <Loader isLoading={loading} />}
       </MovieList>
     </>
   );

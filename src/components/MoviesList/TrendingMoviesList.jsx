@@ -7,17 +7,26 @@ import {
 } from './TrendingMoviesList.styled';
 import { useEffect, useState } from 'react';
 import { getMovies } from 'servises/getMovies';
+import { Loader } from 'components/Loader/Loader';
 
 export const MoviesList = () => {
   const [collection, setCollection] = useState([]);
   const location = useLocation();
+    const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
     async function fetchMovies() {
-      const response = await getMovies();
+      try {
+        setLoading(true);
+        const response = await getMovies();
 
-      setCollection(response.results);
+        setCollection(response.results);
+      } catch (error) {
+        console.log(error.message)
+      } finally {
+        setLoading(false);
+      }
     }
     fetchMovies();
   }, []);
@@ -39,6 +48,7 @@ export const MoviesList = () => {
             </MovieLink>
           );
         })}
+         <Loader isLoading={loading} />
       </MovieList>
     </>
   );
