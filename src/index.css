@@ -7,11 +7,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: antiquewhite;
+  background-color: #d2ecee;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
 }
 
 code {
@@ -22,8 +30,6 @@ code {
 a {
   text-decoration: none;
   color: grey;
-}
-
-.active {
-  color: darkgreen;
+  margin: 0;
+  padding: 0;
 }

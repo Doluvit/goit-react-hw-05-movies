@@ -1,4 +1,4 @@
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { ImSearch } from 'react-icons/im';
@@ -9,7 +9,7 @@ import {
   SearchFormInput,
 } from './RequestMoviesList.styled';
 import { getMovieByName } from 'servises/getMovies';
-import MovieDetails from 'pages/MovieDetails';
+import { MovieLink, MovieList, MovieTittle } from 'components/MoviesList/TrendingMoviesList.styled';
 // import { toast } from 'react-toastify';
 
 const RequestMoviesList = () => {
@@ -42,7 +42,7 @@ const RequestMoviesList = () => {
     setfilmRequest({ newRequest: requestData });
     form.reset();
   };
-console.log(request)
+
   return (
     <>
       <SearchForm onSubmit={handleSubmit}>
@@ -57,15 +57,17 @@ console.log(request)
           name="name"
         />
       </SearchForm>
-      <ul>
+      <MovieList>
         {request.map(({ title, id }) => {
           return (
-            <li key={id}>
-              <MovieDetails movieId={id}>{title}</MovieDetails>
-            </li>
+            <MovieLink key={id}>
+              <Link to={`${id}`} state={{ from: location }}>
+                <MovieTittle>{title}</MovieTittle>
+              </Link>
+            </MovieLink>
           );
         })}
-      </ul>
+      </MovieList>
     </>
   );
 };

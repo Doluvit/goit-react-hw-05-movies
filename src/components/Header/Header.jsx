@@ -1,9 +1,8 @@
-import { NavLink } from 'react-router-dom';
-import { Nav } from './Header.styled';
+import { Nav, Container, NavLink } from './Header.styled';
 
 export const Header = () => {
   return (
-    <div>
+    <Container>
       <nav>
         <Nav>
           <li>
@@ -14,6 +13,6 @@ export const Header = () => {
           </li>
         </Nav>
       </nav>
-    </div>
+    </Container>
   );
 };

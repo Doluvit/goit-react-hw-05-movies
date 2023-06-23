@@ -1,10 +1,11 @@
 import MovieInfo from 'components/MovieInfo/MovieInfo';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'servises/getMovies';
 
 const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState({});
+  const location = useLocation();
   //  const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
   // const movie = data.find(item => item.id === Number(movieId));
@@ -21,7 +22,10 @@ const MovieDetails = () => {
     fetchMovieById();
   }, [movieId]);
 
-  return <>{movieInfo && <MovieInfo movieInfo={movieInfo} />}</>;
+
+ return (
+    <>{movieInfo && <MovieInfo movieInfo={movieInfo} location={location} />}</>
+  );
 };
 
 export default MovieDetails;

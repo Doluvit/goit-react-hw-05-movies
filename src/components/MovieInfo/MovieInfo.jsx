@@ -1,12 +1,22 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
+import {
+  Section,
+  LinkButton,
+  FilmContainer,
+  GenresContainer,
+  AddInfo,
+  AddInfoList,
+  AddInfoItem,
+  HorizontalLine,
+} from './MovieInfo.styled';
 
 const MovieInfo = ({ movieInfo }) => {
+  const location = useLocation();
   const { title, vote_average, overview, poster_path, release_date, genres } =
     movieInfo;
-  const location = useLocation();
-  const buttonGoBack = location.state ?? '/';
+  const buttonGoBack = useRef(location.state?.from ?? '/');
 
   if (!genres) return;
   const genresList = genres.map(genre => (
@@ -15,14 +25,14 @@ const MovieInfo = ({ movieInfo }) => {
     </li>
   ));
   return (
-    <section style={{ padding: '0 40px' }}>
-      <Link
-        to={buttonGoBack}>
+    <Section>
+      <LinkButton to={buttonGoBack.current}>
         <FaLongArrowAltLeft />
         Go back
-      </Link>
+      </LinkButton>
+
       <div>
-        <div>
+        <FilmContainer>
           <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt="" />
           <div>
             <h1>
@@ -32,25 +42,30 @@ const MovieInfo = ({ movieInfo }) => {
             <h2>Overview</h2>
             <p>{overview}</p>
             <h3>Genres</h3>
-            <ul>{genresList}</ul>
+            <GenresContainer>{genresList}</GenresContainer>
           </div>
-        </div>
+        </FilmContainer>
       </div>
+      <HorizontalLine />
       <div>
-        <p>Additional information</p>
-        <ul>
+        <AddInfo>Additional information</AddInfo>
+        <AddInfoList>
           <li>
-            <Link to="cast">Cast</Link>
+            <AddInfoItem to="cast" state={{ from: location }}>
+              Cast
+            </AddInfoItem>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <AddInfoItem to="reviews">Reviews</AddInfoItem>
           </li>
-        </ul>
+        </AddInfoList>
       </div>
-     <Suspense fallback={<div>Loading...</div>}>
+      <HorizontalLine />
+
+      <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
-    </section>
+    </Section>
   );
 };
 

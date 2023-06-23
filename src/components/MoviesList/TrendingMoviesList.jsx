@@ -1,11 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
-import { MovieLink, MovieTittle, MovieListHeader } from './TrendingMoviesList.styled';
+import {
+  MovieLink,
+  MovieTittle,
+  MovieListHeader,
+  MovieList,
+} from './TrendingMoviesList.styled';
 import { useEffect, useState } from 'react';
 import { getMovies } from 'servises/getMovies';
 
 export const MoviesList = () => {
   const [collection, setCollection] = useState([]);
   const location = useLocation();
+
 
   useEffect(() => {
     async function fetchMovies() {
@@ -16,11 +22,10 @@ export const MoviesList = () => {
     fetchMovies();
   }, []);
 
-
-  return (
+ return (
     <>
       <MovieListHeader>Trending today</MovieListHeader>
-      <ul>
+      <MovieList>
         {collection.map(({ title, id }) => {
           if (!title) {
             return null;
@@ -34,7 +39,7 @@ export const MoviesList = () => {
             </MovieLink>
           );
         })}
-      </ul>
+      </MovieList>
     </>
   );
 };
