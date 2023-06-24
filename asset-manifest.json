@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/goit-react-hw-05-movies/static/css/main.7acaea2f.css",
-    "main.js": "/goit-react-hw-05-movies/static/js/main.07d3183d.js",
+    "main.css": "/goit-react-hw-05-movies/static/css/main.b934ec40.css",
+    "main.js": "/goit-react-hw-05-movies/static/js/main.d69722f4.js",
+    "static/media/CastServisePicture.png": "/goit-react-hw-05-movies/static/media/CastServisePicture.730d18a63759b79c87a6.png",
+    "static/media/269-2694820_career-icon-oops-error-message-404.png": "/goit-react-hw-05-movies/static/media/269-2694820_career-icon-oops-error-message-404.ddb150f3a46d967fa209.png",
     "index.html": "/goit-react-hw-05-movies/index.html",
-    "main.7acaea2f.css.map": "/goit-react-hw-05-movies/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/goit-react-hw-05-movies/static/js/main.07d3183d.js.map"
+    "main.b934ec40.css.map": "/goit-react-hw-05-movies/static/css/main.b934ec40.css.map",
+    "main.d69722f4.js.map": "/goit-react-hw-05-movies/static/js/main.d69722f4.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.b934ec40.css",
+    "static/js/main.d69722f4.js"
   ]
 }
