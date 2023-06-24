@@ -1,6 +1,9 @@
+import { Suspense, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
-import { Suspense, useRef } from 'react';
+import PropTypes from 'prop-types';
+
+
 import {
   Section,
   LinkButton,
@@ -15,11 +18,9 @@ import {
 
 const MovieInfo = ({ movieInfo }) => {
   const location = useLocation();
- 
-
-  const { title, vote_average, overview, poster_path, release_date, genres } =
-    movieInfo;
   const buttonGoBack = useRef(location.state?.from ?? '/');
+   const { title, vote_average, overview, poster_path, release_date, genres } =
+    movieInfo;
 
   if (!genres) return;
   const genresList = genres.map(genre => (
@@ -27,6 +28,7 @@ const MovieInfo = ({ movieInfo }) => {
       <p>{genre.name}</p>
     </li>
   ));
+  
   return (
     <Section>
       <LinkButton to={buttonGoBack.current}>
@@ -73,3 +75,7 @@ const MovieInfo = ({ movieInfo }) => {
 };
 
 export default MovieInfo;
+
+MovieInfo.propTypes = {
+  movieInfo: PropTypes.object,
+};

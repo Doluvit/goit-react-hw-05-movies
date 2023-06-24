@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-export const MovieLink = styled.li``;
 
 export const MovieTittle = styled.p`
   font-size: 20px;
@@ -12,7 +11,6 @@ export const MovieTittle = styled.p`
     box-shadow: inset 400px 0 0 0 #54b3d6;
   }
 `;
-
 
 export const MovieListHeader = styled.p`
   margin-left: 40px;

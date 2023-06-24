@@ -1,43 +1,49 @@
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
 import { ImSearch } from 'react-icons/im';
+import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
+import { getMovieByName } from 'servises/getMovies';
+
 import {
+  ErrorMessage,
   SearchForm,
   SearchFormButton,
   SearchFormButtonLabel,
   SearchFormInput,
 } from './RequestMoviesList.styled';
-import { getMovieByName } from 'servises/getMovies';
 import {
-  MovieLink,
   MovieList,
   MovieTittle,
 } from 'components/MoviesList/TrendingMoviesList.styled';
-import { toast } from 'react-toastify';
-import { Loader } from 'components/Loader/Loader';
 
 const RequestMoviesList = () => {
-  const [filmRequest, setfilmRequest] = useSearchParams();
   const [request, setRequest] = useState([]);
-  const newRequest = filmRequest.get('newRequest') ?? '';
   const [loading, setLoading] = useState(false);
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [filmRequest, setfilmRequest] = useSearchParams();
+  const newRequest = filmRequest.get('newRequest') ?? '';
   const location = useLocation();
 
   useEffect(() => {
     const fetchMoviesByName = async () => {
       try {
+        setLoading(true);
         const response = await getMovieByName(newRequest);
         const data = response.results;
+
         setRequest(data);
-        setLoading(true);
+         setHasFetchedData(true);
       } catch (error) {
+        toast.error('Sorry, no films found on your request!');
         console.log(error);
       } finally {
         setLoading(false);
       }
     };
-    if (newRequest !== '') fetchMoviesByName();
+    if (newRequest !== '') {
+      fetchMoviesByName();
+    }
   }, [newRequest]);
 
   const handleSubmit = event => {
@@ -49,6 +55,7 @@ const RequestMoviesList = () => {
       return;
     }
     setfilmRequest({ newRequest: requestData });
+     setHasFetchedData(false);
     form.reset();
   };
 
@@ -67,16 +74,21 @@ const RequestMoviesList = () => {
         />
       </SearchForm>
       <MovieList>
-        {request.map(({ title, id }) => {
-          return (
-            <MovieLink key={id}>
-              <Link to={`${id}`} state={{ from: location }}>
-                <MovieTittle>{title}</MovieTittle>
-              </Link>
-            </MovieLink>
-          );
-        })}
-       {loading && <Loader isLoading={loading} />}
+        {!hasFetchedData && loading && <Loader />}
+        {hasFetchedData && request.length === 0 && (
+          <ErrorMessage>No films found on your request!</ErrorMessage>
+        )}
+        {hasFetchedData &&
+          request.map(({ title, id }) => {
+            return (
+              <li key={id}>
+                <Link to={`${id}`} state={{ from: location }}>
+                  <MovieTittle>{title}</MovieTittle>
+                </Link>
+              </li>
+            );
+          })}
+        {loading && <Loader />}
       </MovieList>
     </>
   );

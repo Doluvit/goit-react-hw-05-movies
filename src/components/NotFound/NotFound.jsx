@@ -1,4 +1,4 @@
-import { Link, MainForm, Oops, PageMk, Wrapper } from './NotFound.styled';
+import { Link, MainForm, PageMk, Wrapper } from './NotFound.styled';
 import img from '../../servises/269-2694820_career-icon-oops-error-message-404.png';
 
 const NotFoundPage = () => {

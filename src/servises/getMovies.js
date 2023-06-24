@@ -42,4 +42,3 @@ export const getMovieReviews = async id => {
   const data = response.data;
   return data;
 };
-

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 export const Section = styled.section`
 padding: 0 40px;
-
 `
 
 export const LinkButton = styled(Link)`

@@ -47,7 +47,7 @@ const Reviews = () => {
           </ReviewItem>
         );
       })}
-      <Loader isLoading={loading} />
+      {loading && <Loader />}
     </ReviewContainer>
   );
 };

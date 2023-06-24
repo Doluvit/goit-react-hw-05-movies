@@ -1,19 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Loader } from 'components/Loader/Loader';
+
+import { getMovies } from 'servises/getMovies';
 import {
-  MovieLink,
   MovieTittle,
   MovieListHeader,
   MovieList,
 } from './TrendingMoviesList.styled';
-import { useEffect, useState } from 'react';
-import { getMovies } from 'servises/getMovies';
-import { Loader } from 'components/Loader/Loader';
 
 export const MoviesList = () => {
   const [collection, setCollection] = useState([]);
   const location = useLocation();
-    const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -23,7 +22,7 @@ export const MoviesList = () => {
 
         setCollection(response.results);
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       } finally {
         setLoading(false);
       }
@@ -31,7 +30,7 @@ export const MoviesList = () => {
     fetchMovies();
   }, []);
 
- return (
+  return (
     <>
       <MovieListHeader>Trending today</MovieListHeader>
       <MovieList>
@@ -41,14 +40,14 @@ export const MoviesList = () => {
           }
 
           return (
-            <MovieLink key={id}>
-              <Link to={`movies/${id}`} state={{from: location}}>
+            <li key={id}>
+              <Link to={`movies/${id}`} state={{ from: location }}>
                 <MovieTittle>{title}</MovieTittle>
               </Link>
-            </MovieLink>
+            </li>
           );
         })}
-         <Loader isLoading={loading} />
+        {loading && <Loader />}
       </MovieList>
     </>
   );

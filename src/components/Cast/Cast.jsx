@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
+
 import { getMovieCast } from 'servises/getMovies';
 import CastServisePicture from '../../servises/CastServisePicture.png';
-import { Loader } from 'components/Loader/Loader';
+
 import {
   CastContainer,
   CastItem,
@@ -14,9 +16,9 @@ import {
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
-  const { movieId } = useParams();
   const [noCast, setNoCast] = useState('');
   const [loading, setLoading] = useState(false);
+  const { movieId } = useParams();
 
   useEffect(() => {
     async function fetchCastById() {
@@ -30,6 +32,8 @@ const Cast = () => {
         setCastInfo(response.cast);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setLoading(false);
       }
     }
     fetchCastById();
@@ -61,7 +65,7 @@ const Cast = () => {
           );
         }
       })}
-      <Loader isLoading={loading} />
+      {loading && <Loader />}
     </CastContainer>
   );
 };

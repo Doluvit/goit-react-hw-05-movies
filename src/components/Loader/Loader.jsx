@@ -1,22 +1,21 @@
-import PropTypes from 'prop-types';
-import { TailSpin } from 'react-loader-spinner';
+import { MagnifyingGlass } from 'react-loader-spinner';
+import { Backdrop, Wrapper } from './Loader.styled';
 
-export const Loader = ({ isLoading }) => {
+export const Loader = () => {
   return (
-    <TailSpin
-      height="100"
-      width="100"
-      color="#4fa94d"
-      ariaLabel="tail-spin-loading"
-      margin = "auto"
-      radius="1"
-      wrapperStyle={{}}
-      wrapperClass=""
-      visible={true}
-    />
+    <Backdrop>
+      <Wrapper>
+        <MagnifyingGlass
+          visible={true}
+          height="120"
+          width="120"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{ margin: 'auto' }}
+          wrapperClass="blocks-wrapper"
+          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+      </Wrapper>
+    </Backdrop>
   );
 };
 
-Loader.propTypes = {
-  isLoading: PropTypes.bool,
-};

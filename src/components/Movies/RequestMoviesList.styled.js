@@ -60,3 +60,13 @@ export const SearchFormInput = styled.input`
     font-size: 18px;
   }
 `;
+
+export const ErrorMessage = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: 700;
+  color: #3f51b5;
+`;
