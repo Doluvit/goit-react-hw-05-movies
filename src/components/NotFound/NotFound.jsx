@@ -1,7 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { Link, MainForm, PageMk, Wrapper } from './NotFound.styled';
 import img from '../../servises/269-2694820_career-icon-oops-error-message-404.png';
 
 const NotFoundPage = () => {
+  const navigate = useNavigate();
+
+  const hadleClick = () => navigate('/', { replace: true });
+    
+
   return (
     <MainForm>
       <Wrapper>
@@ -9,7 +15,7 @@ const NotFoundPage = () => {
         <h2>
           <PageMk>Сторінка не знайдена!</PageMk>
         </h2>
-        <Link to="/">Повернутись на головну</Link>
+        <Link onClick={hadleClick}>Go to main</Link>
       </Wrapper>
     </MainForm>
   );

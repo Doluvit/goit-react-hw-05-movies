@@ -1,3 +1,4 @@
+import routes from 'servises/routes';
 import { Nav, Container, NavLink } from './Header.styled';
 
 export const Header = () => {
@@ -6,10 +7,10 @@ export const Header = () => {
       <nav>
         <Nav>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to={routes.HOME}>Home</NavLink>
           </li>
           <li>
-            <NavLink to="/movies">Movies</NavLink>
+            <NavLink to={routes.MOVIES}>Movies</NavLink>
           </li>
         </Nav>
       </nav>

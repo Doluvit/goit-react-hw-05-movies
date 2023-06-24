@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link as PageLink } from 'react-router-dom';
 
 export const MainForm = styled.div`
  background-color: #fff;
@@ -25,7 +24,7 @@ export const PageMk = styled.p`
   text-align: center;
 `;
 
-export const Link = styled(PageLink)`
+export const Link = styled.button`
   min-width: 130px;
   cursor: pointer;
   text-decoration: none;
@@ -35,7 +34,7 @@ export const Link = styled(PageLink)`
   font-size: 15px;
   text-align: center;
   color: #000000;
-  background: #cad1de;
+  background: #fff;
   padding: 14px 18px;
   border-radius: 4px;
   transition: 0.3s ease;

@@ -1,14 +1,18 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from './Header/Header';
+import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { Header } from './Header/Header';
 
 export const SharedLayout = () => {
   return (
     <>
       <ToastContainer />
       <Header />
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

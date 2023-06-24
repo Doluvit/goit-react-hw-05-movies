@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-
+import routes from 'servises/routes';
 import {
   Section,
   LinkButton,
@@ -56,12 +56,12 @@ const MovieInfo = ({ movieInfo }) => {
         <AddInfo>Additional information</AddInfo>
         <AddInfoList>
           <li>
-            <AddInfoItem to="cast" state={{ from: location }}>
+            <AddInfoItem to={routes.CAST} state={{ from: location }}>
               Cast
             </AddInfoItem>
           </li>
           <li>
-            <AddInfoItem to="reviews">Reviews</AddInfoItem>
+            <AddInfoItem to={routes.REVIEWS}>Reviews</AddInfoItem>
           </li>
         </AddInfoList>
       </div>

@@ -21,19 +21,19 @@ const RequestMoviesList = () => {
   const [request, setRequest] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [filmRequest, setfilmRequest] = useSearchParams();
-  const newRequest = filmRequest.get('newRequest') ?? '';
+  const [filmQuery, setfilmQuery] = useSearchParams();
+  const query = filmQuery.get('query') ?? '';
   const location = useLocation();
 
   useEffect(() => {
     const fetchMoviesByName = async () => {
       try {
         setLoading(true);
-        const response = await getMovieByName(newRequest);
+        const response = await getMovieByName(query);
         const data = response.results;
 
         setRequest(data);
-         setHasFetchedData(true);
+        setHasFetchedData(true);
       } catch (error) {
         toast.error('Sorry, no films found on your request!');
         console.log(error);
@@ -41,10 +41,10 @@ const RequestMoviesList = () => {
         setLoading(false);
       }
     };
-    if (newRequest !== '') {
+    if (query !== '') {
       fetchMoviesByName();
     }
-  }, [newRequest]);
+  }, [query]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -54,7 +54,7 @@ const RequestMoviesList = () => {
       toast.error('Please, input your request!');
       return;
     }
-    setfilmRequest({ newRequest: requestData });
+    setfilmQuery({ query: requestData });
      setHasFetchedData(false);
     form.reset();
   };
